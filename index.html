@@ -18,12 +18,11 @@
     <style>
         :root {
             --bg-dark: #010409;
-            --bg-card: rgba(13, 17, 23, 0.75);
+            --bg-card: rgba(13, 17, 23, 0.7);
             --cyan-primary: #38bdf8;
             --blue-primary: #3b82f6;
             --purple-primary: #a855f7;
             --emerald-primary: #10b981;
-            --amber-primary: #f59e0b;
             --text-main: #f0f6fc;
             --text-muted: #8b949e;
             --border-subtle: rgba(240, 246, 252, 0.1);
@@ -55,23 +54,23 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .wrapper {
-            max-width: 1240px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
 
         nav {
             position: fixed;
-            top: 1.5rem;
+            top: 2rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(12px) saturate(180%);
             border: 1px solid var(--border-subtle);
             padding: 0.6rem 2rem;
             border-radius: 100px;
@@ -99,43 +98,45 @@
         .bento-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            border-radius: 24px;
+            border-radius: 28px;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(16px);
         }
 
         .bento-card:hover {
             border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.05);
         }
 
         .hero-title {
             font-family: var(--font-heading);
-            font-size: clamp(3rem, 8vw, 5.2rem);
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
             font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.2));
         }
 
         .system-monitor {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
             font-family: var(--font-code);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--emerald-primary);
-            background: rgba(16, 185, 129, 0.08);
+            background: rgba(16, 185, 129, 0.1);
             padding: 0.5rem 1rem;
-            border-radius: 50px;
+            border-radius: 12px;
             border: 1px solid rgba(16, 185, 129, 0.2);
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 0.75rem;
-            width: fit-content;
         }
 
         .status-pulse {
@@ -153,33 +154,32 @@
         }
 
         .terminal-container {
-            background: #090d13;
+            background: #0d1117;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.05);
             height: 100%;
             display: flex;
             flex-direction: column;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
         }
 
         .terminal-content {
             flex: 1;
-            padding: 1.25rem;
+            padding: 1.5rem;
             font-family: var(--font-code);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #c9d1d9;
             overflow-y: auto;
-            max-height: 220px;
         }
 
         .cmd-line { color: var(--cyan-primary); font-weight: 700; }
         .log-success { color: var(--emerald-primary); }
         .log-info { color: var(--purple-primary); }
-        .log-warn { color: var(--amber-primary); }
 
         .skill-meter {
-            height: 5px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 3px;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
             margin-top: 0.5rem;
             overflow: hidden;
         }
@@ -195,521 +195,377 @@
         }
 
         .btn-modern {
-            padding: 0.85rem 1.8rem;
-            border-radius: 14px;
+            padding: 1rem 2.5rem;
+            border-radius: 18px;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            transition: all 0.3s ease;
+            gap: 0.8rem;
+            transition: all 0.3s;
             position: relative;
+            overflow: hidden;
         }
 
-        .btn-glow { background: #ffffff; color: #000000; }
-        .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3); }
+        .btn-glow { background: #fff; color: #000; }
+        .btn-glow:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); }
 
-        .btn-outline { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle); color: #fff; }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
+        .btn-outline { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); color: #fff; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
 
         .timeline-line {
             position: absolute;
-            left: 20px;
+            left: 24px;
             top: 0;
             bottom: 0;
             width: 2px;
             background: linear-gradient(180deg, var(--cyan-primary) 0%, transparent 100%);
-            opacity: 0.3;
+            opacity: 0.2;
         }
 
         [data-reveal] {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         [data-reveal].active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- Animated Canvas Background -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Floating Navigation Bar -->
     <nav>
         <div class="nav-inner">
-            <a href="#" class="font-black text-lg tracking-tighter">SAICHANDAN<span class="text-sky-400">.DEV</span></a>
+            <a href="#" class="font-black text-xl tracking-tighter">MS<span class="text-sky-400">.</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#exp">Experience</a></li>
-                <li><a href="#tech">Skills</a></li>
+                <li><a href="#exp">Exp</a></li>
+                <li><a href="#tech">Tech</a></li>
                 <li><a href="#certs">Certs</a></li>
-                <li><a href="#edu">Education</a></li>
             </ul>
-            <a href="mailto:maddisaichandan2001@gmail.com" class="bg-sky-400 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-sky-300 transition-colors">Contact</a>
+            <!-- UPDATED RESUME BUTTON LINK -->
+            <a href="Maddi_saichandan_resume.pdf" target="_blank" class="bg-white text-black px-5 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-1.5">
+                <i class="fa-solid fa-file-pdf text-sky-500"></i> Resume
+            </a>
         </div>
     </nav>
 
-    <!-- Main Container -->
-    <main class="wrapper pt-40 pb-24">
-
-        <!-- Hero Bento Grid Section -->
-        <div class="grid grid-cols-12 gap-6 mb-8" id="about">
-            
-            <!-- Bio Card (8 Columns) -->
-            <div class="col-span-12 lg:col-span-8 bento-card p-8 lg:p-12 flex flex-col justify-between min-h-[500px]" data-reveal>
-                <div>
-                    <div class="system-monitor mb-6">
-                        <span class="status-pulse"></span>
-                        <span>Status: <span class="text-white">Active Talent</span> | Domain: <span class="text-white">UBS DevOps / Cloud SRE</span></span>
-                    </div>
-                    <p class="text-sky-400 font-mono text-xs font-bold mb-3 tracking-widest uppercase">Tech DevOps Engineer</p>
-                    <h1 class="hero-title mb-6">Maddi Saichandan</h1>
-                    <p class="text-lg text-slate-300 max-w-2xl mb-8 leading-relaxed">
-                        DevOps Engineer with 2 years of hands-on experience at <strong>UBS (Union Bank of Switzerland)</strong> via Hays India[cite: 1]. Specializing in <strong>Azure Kubernetes Service (AKS)</strong>, automated <strong>GitLab & Azure DevOps CI/CD</strong> pipelines, <strong>Terraform IaC</strong>, and full-stack observability with <strong>Grafana Alloy & Azure Monitor</strong>[cite: 1].
-                    </p>
+    <main class="wrapper pt-48 pb-32">
+        <div class="grid grid-cols-12 gap-8 mb-8" id="about">
+            <div class="col-span-12 lg:col-span-8 bento-card p-10 lg:p-14 flex flex-col justify-center min-h-[520px]" data-reveal>
+                <div class="system-monitor">
+                    <span class="status-pulse"></span>
+                    <span>Status: <span class="text-white">Active Talent</span> | Role: <span class="text-white">DevOps / SRE</span></span>
                 </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="mailto:maddisaichandan2001@gmail.com" class="btn-modern btn-glow">
-                        <i class="fa-solid fa-paper-plane"></i> Quick Connect
-                    </a>
-                    <a href="https://github.com/SAICHANDAN8" target="_blank" class="btn-modern btn-outline">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/maddi-saichandan-343592234" target="_blank" class="btn-modern btn-outline">
-                        <i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn
-                    </a>
+                <p class="text-sky-400 font-mono text-sm mb-4 tracking-widest uppercase">Tech DevOps Engineer</p>
+                <h1 class="hero-title mb-6">Maddi Saichandan</h1>
+                <p class="text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+                    Ex-<strong>UBS</strong> Infrastructure Engineer[cite: 1]. Specialized in <strong>AKS</strong> orchestration, <strong>Terraform</strong> automation, and high-concurrency <strong>GitLab</strong> pipelines[cite: 1].
+                </p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="mailto:maddisaichandan2001@gmail.com" class="btn-modern btn-glow"><i class="fa-solid fa-paper-plane"></i> Quick Connect</a>
+                    <!-- UPDATED HERO RESUME BUTTON LINK -->
+                    <a href="Maddi_saichandan_resume.pdf" target="_blank" class="btn-modern btn-outline"><i class="fa-solid fa-cloud-arrow-down text-sky-400"></i> Get Resume</a>
                 </div>
             </div>
 
-            <!-- Recruiter Snapshot & Live Terminal (4 Columns) -->
             <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
-                
-                <!-- Snapshot Card -->
-                <div class="bento-card p-6 bg-gradient-to-br from-sky-500/10 to-slate-900/60" data-reveal>
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Recruiter Overview</h3>
-                        <span class="text-[10px] font-bold text-sky-400 bg-sky-400/10 border border-sky-400/20 px-2 py-0.5 rounded-full">UBS Enterprise</span>
+                <div class="bento-card p-6 flex-1 bg-gradient-to-br from-sky-500/10 to-slate-900/50" data-reveal>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Recruiter Snapshot</h3>
+                        <span class="text-[10px] font-bold text-sky-400 bg-sky-400/10 px-2 py-0.5 rounded">Priority Talent</span>
                     </div>
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span class="text-xs text-slate-400">Experience</span>
-                            <span class="text-xs font-bold text-white">2 Years Experience[cite: 1]</span>
+                            <span class="text-xs text-slate-500">Experience</span>
+                            <span class="text-xs font-bold">2+ Years Enterprise[cite: 1]</span>
                         </div>
                         <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span class="text-xs text-slate-400">Current Client</span>
-                            <span class="text-xs font-bold text-sky-400">UBS (Hays India)[cite: 1]</span>
+                            <span class="text-xs text-slate-500">Notice Period</span>
+                            <span class="text-xs font-bold text-emerald-400">Immediate / 15 Days</span>
                         </div>
                         <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span class="text-xs text-slate-400">Primary Cloud</span>
-                            <span class="text-xs font-bold text-white">Microsoft Azure & AKS[cite: 1]</span>
+                            <span class="text-xs text-slate-500">Location</span>
+                            <span class="text-xs font-bold">Hyderabad (Remote OK)[cite: 1]</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-xs text-slate-400">Location</span>
-                            <span class="text-xs font-bold text-emerald-400">Hyderabad, India[cite: 1]</span>
+                            <span class="text-xs text-slate-500">Current Org</span>
+                            <span class="text-xs font-bold">UBS (Hays)[cite: 1]</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Live Terminal Simulation -->
-                <div class="bento-card overflow-hidden h-[250px]" data-reveal>
-                    <div class="bg-slate-950 p-3 border-b border-white/5 flex items-center gap-2">
-                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></div>
-                        <span class="text-[10px] text-slate-500 font-mono ml-2">ubs_aks_telemetry.log</span>
+                <div class="bento-card overflow-hidden h-[240px]" data-reveal>
+                    <div class="bg-slate-900/80 p-3 border-b border-white/5 flex gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/30"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/30"></div>
+                        <span class="text-[9px] text-slate-600 font-mono">live_ops.log</span>
                     </div>
-                    <div class="terminal-content" id="terminal-output"></div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Role Specialties Banner -->
-        <div class="mb-20" data-reveal>
-            <div class="bento-card p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <span class="text-xs font-black uppercase tracking-[0.25em] text-slate-500">Core Specialties:</span>
-                <div class="flex flex-wrap gap-3">
-                    <span class="bg-sky-400/10 border border-sky-400/20 px-4 py-2 rounded-xl font-bold text-xs text-sky-400 flex items-center gap-2">
-                        <i class="fa-solid fa-gears"></i> DevOps Engineering[cite: 1]
-                    </span>
-                    <span class="bg-purple-400/10 border border-purple-400/20 px-4 py-2 rounded-xl font-bold text-xs text-purple-400 flex items-center gap-2">
-                        <i class="fa-solid fa-server"></i> AKS & Kubernetes[cite: 1]
-                    </span>
-                    <span class="bg-emerald-400/10 border border-emerald-400/20 px-4 py-2 rounded-xl font-bold text-xs text-emerald-400 flex items-center gap-2">
-                        <i class="fa-solid fa-cloud"></i> Azure & Terraform IaC[cite: 1]
-                    </span>
-                    <span class="bg-amber-400/10 border border-amber-400/20 px-4 py-2 rounded-xl font-bold text-xs text-amber-400 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line"></i> Grafana Observability[cite: 1]
-                    </span>
+                    <div class="terminal-content p-4 text-[11px]" id="terminal-output"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Experience Section -->
-        <div class="mb-24" id="exp" data-reveal>
-            <div class="flex justify-between items-end mb-8">
+        <div class="mb-24" data-reveal>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 p-4 flex items-center">
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-600">Targeting Roles:</h3>
+                </div>
+                <div class="md:col-span-3 flex flex-wrap gap-3">
+                    <div class="bg-sky-400/5 border border-sky-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-sky-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-gears text-sky-400"></i><span class="font-bold text-sm">DevOps Engineer[cite: 1]</span>
+                    </div>
+                    <div class="bg-purple-400/5 border border-purple-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-purple-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-server text-purple-400"></i><span class="font-bold text-sm">SRE</span>
+                    </div>
+                    <div class="bg-emerald-400/5 border border-emerald-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-emerald-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-cloud text-emerald-400"></i><span class="font-bold text-sm">Cloud Engineer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-32" id="exp" data-reveal>
+            <div class="flex justify-between items-end mb-12">
                 <div>
-                    <span class="text-sky-400 font-mono text-xs uppercase tracking-widest font-bold">01. Experience</span>
-                    <h2 class="text-3xl font-bold mt-1">Professional Impact</h2>
+                    <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">01. Experience</span>
+                    <h2 class="text-4xl font-bold mt-2">Professional Impact</h2>
                 </div>
-                <p class="hidden md:block text-2xl font-black text-white/10 uppercase">UBS / Hays</p>
+                <div class="hidden md:block text-right"><p class="text-4xl font-black text-white/5">UBS / HAYS</p></div>
             </div>
-
-            <div class="bento-card p-8 lg:p-12">
-                <div class="flex flex-col md:flex-row justify-between mb-8 gap-4 border-b border-white/5 pb-6">
+            <div class="bento-card p-10 lg:p-12">
+                <div class="flex flex-col md:flex-row justify-between mb-10 gap-6">
                     <div>
-                        <h3 class="text-2xl font-bold">Tech DevOps Engineer[cite: 1]</h3>
-                        <p class="text-sky-400 text-base font-semibold mt-1">Hays India Private Limited — Client: UBS (Union Bank of Switzerland)[cite: 1]</p>
+                        <h3 class="text-3xl font-bold mb-2">Tech DevOps Engineer[cite: 1]</h3>
+                        <p class="text-sky-400 text-lg font-semibold">Hays India — UBS (Union Bank of Switzerland)[cite: 1]</p>
                     </div>
                     <div class="md:text-right">
-                        <span class="px-3.5 py-1.5 rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-400 font-bold text-xs uppercase">Jan 2025 — Present[cite: 1]</span>
-                        <p class="text-slate-500 text-xs mt-2 uppercase font-mono">Hyderabad, Telangana, India[cite: 1]</p>
+                        <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 font-bold text-xs uppercase">Jan 2025 — Present[cite: 1]</span>
+                        <p class="text-slate-500 text-xs mt-2 uppercase tracking-widest font-mono">Hyderabad, India[cite: 1]</p>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-sky-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-sky-400/10 text-sky-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-code-branch"></i></div>
-                        <h4 class="font-bold text-base mb-2">CI/CD & Pipeline Automation[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Built GitLab CI/CD and Azure DevOps YAML pipelines automating build, test, security scans, and multi-environment deployments[cite: 1].</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6 group-hover:bg-sky-500 group-hover:text-black transition-all"><i class="fa-solid fa-code-branch"></i></div>
+                        <h4 class="font-bold text-lg mb-3">CI/CD Orchestration[cite: 1]</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Engineered high-concurrency pipelines in GitLab and Azure DevOps with automated compliance gates[cite: 1].</p>
                     </div>
-
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-purple-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-purple-400/10 text-purple-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-cubes"></i></div>
-                        <h4 class="font-bold text-base mb-2">Kubernetes & AKS[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Managed Azure Kubernetes Service (AKS) deployments, Dockerfile optimization, auto-scaling, rolling updates, rollbacks, and troubleshooting[cite: 1].</p>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-500 group-hover:text-black transition-all"><i class="fa-solid fa-cubes"></i></div>
+                        <h4 class="font-bold text-lg mb-3">AKS Management[cite: 1]</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Scaling container operations on Azure Kubernetes Service with Docker optimization and Helm charts[cite: 1].</p>
                     </div>
-
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-400/10 text-emerald-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-layer-group"></i></div>
-                        <h4 class="font-bold text-base mb-2">Terraform IaC[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Provisioned Azure cloud resources using Terraform modules with automated plan/apply execution pipelines[cite: 1].</p>
-                    </div>
-
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-chart-line"></i></div>
-                        <h4 class="font-bold text-base mb-2">Grafana & Azure Telemetry[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Configured Grafana dashboards and Grafana Alloy agents to stream metrics, logs, and traces. Used Azure Monitor & Log Analytics (KQL) for RCA[cite: 1].</p>
-                    </div>
-
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-blue-400/10 text-blue-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-database"></i></div>
-                        <h4 class="font-bold text-base mb-2">Azure PostgreSQL[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Maintained PostgreSQL databases on Azure, managing backups, RBAC access control, performance monitoring, and version upgrades[cite: 1].</p>
-                    </div>
-
-                    <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-400/30 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-rose-400/10 text-rose-400 flex items-center justify-center mb-4 text-lg"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4 class="font-bold text-base mb-2">ITSM & Release Control[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">Managed production change controls and incidents in ServiceNow (GSNOW) and executed releases via Atlas across dev, QA, and ops teams[cite: 1].</p>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:bg-emerald-500 group-hover:text-black transition-all"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 class="font-bold text-lg mb-3">Full-Stack Observability[cite: 1]</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Leveraging Grafana Alloy and KQL to stream production metrics and telemetry for 99.9% uptime[cite: 1].</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Technical Skills Arsenal Section -->
-        <div class="mb-24" id="tech" data-reveal>
-            <div class="mb-8">
-                <span class="text-sky-400 font-mono text-xs uppercase tracking-widest font-bold">02. Stack</span>
-                <h2 class="text-3xl font-bold mt-1">Technical Arsenal</h2>
+        <div class="mb-32" id="tech" data-reveal>
+            <div class="mb-12">
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">02. Stack</span>
+                <h2 class="text-4xl font-bold mt-2">The Arsenal</h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <div class="bento-card p-6">
-                    <h3 class="font-bold text-base mb-4 flex justify-between items-center">Cloud & IaC <i class="fa-solid fa-cloud text-sky-400"></i></h3>
-                    <div class="space-y-4">
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Cloud <i class="fa-solid fa-cloud text-sky-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Microsoft Azure[cite: 1]</span><span class="text-sky-400">95%</span></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Azure[cite: 1]</span><span class="text-sky-400">95%</span></div>
                             <div class="skill-meter"><div class="skill-progress" style="--percent: 95%;"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Terraform[cite: 1]</span><span class="text-sky-400">92%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 92%;"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Key Vault & RBAC[cite: 1]</span><span class="text-sky-400">88%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 88%;"></div></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">AKS / K8s[cite: 1]</span><span class="text-sky-400">90%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%;"></div></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="bento-card p-6">
-                    <h3 class="font-bold text-base mb-4 flex justify-between items-center">Containers & CI <i class="fa-solid fa-gears text-purple-400"></i></h3>
-                    <div class="space-y-4">
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">IaC & CI <i class="fa-solid fa-gears text-purple-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Kubernetes / AKS[cite: 1]</span><span class="text-purple-400">92%</span></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Terraform[cite: 1]</span><span class="text-purple-400">92%</span></div>
                             <div class="skill-meter"><div class="skill-progress" style="--percent: 92%; background: var(--purple-primary);"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Docker & Helm[cite: 1]</span><span class="text-purple-400">90%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%; background: var(--purple-primary);"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">GitLab & Azure Pipelines[cite: 1]</span><span class="text-purple-400">90%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%; background: var(--purple-primary);"></div></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">GitLab CI[cite: 1]</span><span class="text-purple-400">88%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 88%; background: var(--purple-primary);"></div></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="bento-card p-6">
-                    <h3 class="font-bold text-base mb-4 flex justify-between items-center">Observability <i class="fa-solid fa-chart-line text-emerald-400"></i></h3>
-                    <div class="space-y-4">
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Observe <i class="fa-solid fa-tower-observation text-emerald-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Grafana & Alloy[cite: 1]</span><span class="text-emerald-400">88%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 88%; background: var(--emerald-primary);"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Azure Monitor / KQL[cite: 1]</span><span class="text-emerald-400">85%</span></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Grafana[cite: 1]</span><span class="text-emerald-400">85%</span></div>
                             <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--emerald-primary);"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Prometheus & Loki[cite: 1]</span><span class="text-emerald-400">82%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 82%; background: var(--emerald-primary);"></div></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Monitor/KQL[cite: 1]</span><span class="text-emerald-400">80%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 80%; background: var(--emerald-primary);"></div></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="bento-card p-6">
-                    <h3 class="font-bold text-base mb-4 flex justify-between items-center">Scripting & Ops <i class="fa-solid fa-terminal text-amber-400"></i></h3>
-                    <div class="space-y-4">
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Tooling <i class="fa-solid fa-terminal text-blue-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">Python / Bash / YAML[cite: 1]</span><span class="text-amber-400">88%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 88%; background: var(--amber-primary);"></div></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Python/Bash[cite: 1]</span><span class="text-blue-400">85%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--blue-primary);"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">PostgreSQL / SQL[cite: 1]</span><span class="text-amber-400">85%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--amber-primary);"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-400">ServiceNow / GenAI[cite: 1]</span><span class="text-amber-400">85%</span></div>
-                            <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--amber-primary);"></div></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Docker[cite: 1]</span><span class="text-blue-400">90%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%; background: var(--blue-primary);"></div></div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- Certifications & Education Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24" id="certs">
-            
-            <!-- Certifications -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" id="certs">
             <div data-reveal>
-                <span class="text-sky-400 font-mono text-xs uppercase tracking-widest font-bold">03. Certifications</span>
-                <h2 class="text-2xl font-bold mt-1 mb-6">Validated Certifications[cite: 1]</h2>
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">03. Certifications</span>
+                <h2 class="text-3xl font-bold mt-2 mb-10">Validated Expertise</h2>
                 <div class="space-y-4">
-                    <div class="bento-card p-5 flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-xl bg-sky-400/10 text-sky-400 flex items-center justify-center text-xl shrink-0"><i class="fa-brands fa-microsoft"></i></div>
-                        <div>
-                            <h4 class="font-bold text-base text-white">Azure Fundamentals (AZ-900)[cite: 1]</h4>
-                            <p class="text-slate-400 text-xs font-mono">Microsoft Certified[cite: 1]</p>
-                        </div>
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-sky-400 group-hover:text-black transition-colors rounded-2xl"><i class="fa-brands fa-microsoft"></i></div>
+                        <div><h4 class="font-bold">Azure Fundamentals (AZ-900)[cite: 1]</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">Certified Practitioner[cite: 1]</p></div>
                     </div>
-                    <div class="bento-card p-5 flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-xl bg-purple-400/10 text-purple-400 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-brain"></i></div>
-                        <div>
-                            <h4 class="font-bold text-base text-white">Azure AI Fundamentals (AI-900)[cite: 1]</h4>
-                            <p class="text-slate-400 text-xs font-mono">Microsoft Certified[cite: 1]</p>
-                        </div>
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-purple-400 group-hover:text-black transition-colors rounded-2xl"><i class="fa-solid fa-microchip"></i></div>
+                        <div><h4 class="font-bold">Azure AI Fundamentals (AI-900)[cite: 1]</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">Intelligent Solutions[cite: 1]</p></div>
                     </div>
-                    <div class="bento-card p-5 flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-400/10 text-emerald-400 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-user-shield"></i></div>
-                        <div>
-                            <h4 class="font-bold text-base text-white">Azure AD Associate[cite: 1]</h4>
-                            <p class="text-slate-400 text-xs font-mono">Microsoft Security[cite: 1]</p>
-                        </div>
-                    </div>
-                    <div class="bento-card p-5 flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center text-xl shrink-0"><i class="fa-brands fa-gitlab"></i></div>
-                        <div>
-                            <h4 class="font-bold text-base text-white">GitLab Fundamentals[cite: 1]</h4>
-                            <p class="text-slate-400 text-xs font-mono">GitLab CI/CD[cite: 1]</p>
-                        </div>
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-orange-500 group-hover:text-black transition-colors rounded-2xl"><i class="fa-brands fa-gitlab"></i></div>
+                        <div><h4 class="font-bold">GitLab Fundamentals[cite: 1]</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">DevOps Pipeline Master[cite: 1]</p></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Education -->
-            <div id="edu" data-reveal>
-                <span class="text-sky-400 font-mono text-xs uppercase tracking-widest font-bold">04. Education</span>
-                <h2 class="text-2xl font-bold mt-1 mb-6">Academic History[cite: 1]</h2>
-                <div class="relative pl-8 space-y-6">
+            <div data-reveal>
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">04. Education</span>
+                <h2 class="text-3xl font-bold mt-2 mb-10">Foundations</h2>
+                <div class="relative pl-10 space-y-12">
                     <div class="timeline-line"></div>
-                    
-                    <div class="relative bento-card p-5">
-                        <div class="absolute -left-10 top-6 w-4 h-4 rounded-full bg-sky-400 border-4 border-black z-10"></div>
-                        <h4 class="font-bold text-base text-white">B.Tech in CS & Data Science[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs">TKR College of Engineering and Technology (2021 — 2024)[cite: 1]</p>
-                        <span class="inline-block mt-2 text-xs font-bold text-sky-400 bg-sky-400/10 px-2.5 py-0.5 rounded-md font-mono">CGPA: 8.0[cite: 1]</span>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-0 w-5 h-5 rounded-full bg-sky-400 border-4 border-black z-10"></div>
+                        <h4 class="font-bold text-xl">B.Tech in CS & Data Science[cite: 1]</h4>
+                        <p class="text-slate-400">TKR College of Engineering and Technology[cite: 1]</p>
+                        <div class="mt-4 flex items-center gap-3"><span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-lg">8.0 CGPA[cite: 1]</span><span class="text-xs text-slate-500 font-mono">2021 — 2024[cite: 1]</span></div>
                     </div>
-
-                    <div class="relative bento-card p-5">
-                        <div class="absolute -left-10 top-6 w-4 h-4 rounded-full bg-purple-400 border-4 border-black z-10"></div>
-                        <h4 class="font-bold text-base text-white">Diploma in ECE[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs">TKR College of Engineering and Technology (2018 — 2021)[cite: 1]</p>
-                        <span class="inline-block mt-2 text-xs font-bold text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-md font-mono">CGPA: 9.11[cite: 1]</span>
-                    </div>
-
-                    <div class="relative bento-card p-5">
-                        <div class="absolute -left-10 top-6 w-4 h-4 rounded-full bg-emerald-400 border-4 border-black z-10"></div>
-                        <h4 class="font-bold text-base text-white">10th Class (Secondary Education)[cite: 1]</h4>
-                        <p class="text-slate-400 text-xs">Adarsha Vidyalayam High School (2017 — 2018)[cite: 1]</p>
-                        <span class="inline-block mt-2 text-xs font-bold text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-md font-mono">CGPA: 8.5[cite: 1]</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Contact Section -->
-        <div class="mt-20 text-center" id="contact" data-reveal>
-            <div class="bento-card p-12 lg:p-16">
-                <h2 class="hero-title !text-4xl md:!text-6xl mb-6">Let's Connect</h2>
-                <p class="text-slate-400 text-base max-w-xl mx-auto mb-8">
-                    Open to opportunities in Cloud Engineering, DevOps Automation, and Site Reliability[cite: 1].
-                </p>
-                <div class="flex flex-col items-center gap-6">
-                    <a href="mailto:maddisaichandan2001@gmail.com" class="text-2xl md:text-4xl font-light hover:text-sky-400 transition-colors border-b border-white/10 pb-2">
-                        maddisaichandan2001@gmail.com[cite: 1]
-                    </a>
-                    <div class="flex flex-wrap justify-center gap-8 mt-2">
-                        <div class="text-center">
-                            <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black mb-1">Direct Phone</p>
-                            <a href="tel:+918463928916" class="text-base font-bold text-white hover:text-sky-400 transition-colors">+91 8463928916[cite: 1]</a>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black mb-1">Location</p>
-                            <p class="text-base font-bold text-white">Hyderabad, Telangana, India[cite: 1]</p>
-                        </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-0 w-5 h-5 rounded-full bg-slate-800 border-4 border-black z-10"></div>
+                        <h4 class="font-bold text-xl">Diploma in ECE[cite: 1]</h4>
+                        <p class="text-slate-400">TKR College of Engineering and Technology[cite: 1]</p>
+                        <div class="mt-4 flex items-center gap-3"><span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-lg">9.11 CGPA[cite: 1]</span><span class="text-xs text-slate-500 font-mono">2018 — 2021[cite: 1]</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="mt-48 text-center" data-reveal>
+            <h2 class="hero-title !text-5xl md:!text-7xl mb-12">Let's connect.</h2>
+            <div class="flex flex-col items-center gap-8">
+                <a href="mailto:maddisaichandan2001@gmail.com" class="text-3xl md:text-5xl font-light hover:text-sky-400 transition-colors border-b border-white/10 pb-4">maddisaichandan2001@gmail.com[cite: 1]</a>
+                <div class="flex gap-12">
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-black mb-2">Direct Line</p>
+                        <a href="tel:+918463928916" class="text-xl font-bold">+91 8463928916[cite: 1]</a>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-black mb-2">Location</p>
+                        <p class="text-xl font-bold">Hyderabad, IN[cite: 1]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 bg-black/60 text-center">
-        <div class="wrapper flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-mono">
-            <p>&copy; 2026 Maddi Saichandan. Hosted on GitHub Pages[cite: 1].</p>
-            <div class="flex gap-6">
-                <a href="https://github.com/SAICHANDAN8" target="_blank" class="hover:text-sky-400 transition-colors"><i class="fa-brands fa-github"></i> GitHub[cite: 1]</a>
-                <a href="https://linkedin.com/in/maddi-saichandan-343592234" target="_blank" class="hover:text-sky-400 transition-colors"><i class="fa-brands fa-linkedin"></i> LinkedIn[cite: 1]</a>
-            </div>
-        </div>
+    <footer class="py-20 border-t border-white/5 bg-black/50 text-center">
+        <p class="text-slate-500 text-sm font-mono">&copy; 2026 Maddi Saichandan / Designed for High-Scale Ops.[cite: 1]</p>
     </footer>
 
-    <!-- Interactive Canvas & Terminal Script -->
     <script>
-        // Particle Background Canvas
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         function initParticles() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            const count = Math.floor(window.innerWidth / 20);
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < 60; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    size: Math.random() * 2 + 0.5
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 2
                 });
             }
         }
-
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
             ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
-
-            particles.forEach((p, idx) => {
-                p.x += p.vx; 
-                p.y += p.vy;
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                ctx.beginPath(); 
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); 
-                ctx.fill();
-
-                for (let j = idx + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                particles.forEach(p2 => {
                     const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if (dist < 140) {
-                        ctx.beginPath(); 
-                        ctx.moveTo(p.x, p.y); 
-                        ctx.lineTo(p2.x, p2.y); 
-                        ctx.stroke();
+                    if (dist < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
                     }
-                }
+                });
             });
             requestAnimationFrame(drawParticles);
         }
-
-        // Terminal Log Output
         const logs = [
+            { t: "Establishing secure shell...", c: "log-info" },
             { t: "Connecting to UBS-AKS-Prod-Cluster...", c: "log-info" },
             { t: "Authentication success: Saichandan.dev", c: "log-success" },
-            { t: "az aks get-credentials --name ubs-prod", c: "cmd-line" },
-            { t: "STATUS: 12 Nodes Healthy | 0 Restarts", c: "log-success" },
-            { t: "terraform plan -out=tfplan", c: "cmd-line" },
-            { t: "No infrastructure drift detected.", c: "log-success" },
-            { t: "Streaming Grafana Alloy telemetry...", c: "log-info" },
-            { t: "CPU: 38% | RAM: 58% | Network: OK", c: "log-success" },
-            { t: "PostgreSQL DB Backup Status: Completed", c: "log-success" },
-            { t: "Awaiting next CI/CD pipeline deployment...", c: "log-warn" }
+            { t: "Syncing 12 running nodes...", c: "log-info" },
+            { t: "kubectl get nodes --all-namespaces", c: "cmd-line" },
+            { t: "NAME STATUS AGE VERSION", c: "text-slate-500" },
+            { t: "aks-nodepool-1 Ready 142d v1.27.3", c: "log-success" },
+            { t: "aks-nodepool-2 Ready 142d v1.27.3", c: "log-success" },
+            { t: "Fetching production metrics...", c: "log-info" },
+            { t: "CPU Usage: 42% | RAM: 64% | Disk: OK", c: "log-success" },
+            { t: "Checking Terraform state drift...", c: "log-info" },
+            { t: "State is up to date. No drift detected.", c: "log-success" },
+            { t: "Awaiting next deployment hook...", c: "cmd-line" }
         ];
-
         function runTerminal() {
             const container = document.getElementById('terminal-output');
             if(!container) return;
             let i = 0;
-
             function addLog() {
                 if (i < logs.length) {
                     const p = document.createElement('p');
-                    p.className = 'mb-1.5 ' + logs[i].c;
-                    p.innerHTML = '> ' + logs[i].t;
+                    p.className = 'mb-2 ' + logs[i].c;
+                    p.innerHTML = logs[i].t;
                     container.appendChild(p);
                     container.scrollTop = container.scrollHeight;
                     i++;
-                    setTimeout(addLog, 900 + Math.random() * 800);
-                } else { 
-                    i = 0; 
-                    container.innerHTML = ''; 
-                    addLog(); 
-                }
+                    setTimeout(addLog, 800 + Math.random() * 1000);
+                } else { i = 0; container.innerHTML = ''; addLog(); }
             }
             addLog();
         }
-
-        // Scroll Reveal Trigger
         function handleReveal() {
             const reveals = document.querySelectorAll('[data-reveal]');
             reveals.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.88) { 
-                    el.classList.add('active'); 
-                }
+                if (rect.top < window.innerHeight * 0.85) { el.classList.add('active'); }
             });
         }
-
         window.addEventListener('scroll', handleReveal);
         window.addEventListener('resize', initParticles);
-        window.onload = () => { 
-            initParticles(); 
-            drawParticles(); 
-            runTerminal(); 
-            handleReveal(); 
-        };
+        window.onload = () => { initParticles(); drawParticles(); runTerminal(); handleReveal(); };
     </script>
 </body>
 </html>
