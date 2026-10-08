@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maddi Saichandan — Tech DevOps Engineer</title>
     <meta name="description" content="Portfolio of Maddi Saichandan, Tech DevOps Engineer specializing in Azure, AKS, Terraform, GitLab CI/CD, and Observability.">
-    
+
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
-            --bg-dark: #07090e;
-            --bg-card: rgba(18, 24, 38, 0.75);
-            --bg-card-hover: rgba(28, 36, 56, 0.85);
-            --border-glow: rgba(56, 189, 248, 0.2);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            
-            --cyan-accent: #38bdf8;
-            --purple-accent: #a855f7;
-            --emerald-accent: #34d399;
-            --amber-accent: #fbbf24;
-            
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-dark: #010409;
+            --bg-card: rgba(13, 17, 23, 0.7);
+            --cyan-primary: #38bdf8;
+            --blue-primary: #3b82f6;
+            --purple-primary: #a855f7;
+            --emerald-primary: #10b981;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-subtle: rgba(240, 246, 252, 0.1);
             --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
         }
 
@@ -43,685 +43,525 @@
             color: var(--text-main);
             font-family: var(--font-sans);
             line-height: 1.6;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(52, 211, 153, 0.08) 0px, transparent 50%);
-            background-attachment: fixed;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        a { color: inherit; text-decoration: none; }
-
-        /* Container */
-        .wrapper {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Navbar */
-        nav {
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 999;
-            background: rgba(7, 9, 14, 0.8);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid var(--border-subtle);
+            padding: 0.6rem 2rem;
+            border-radius: 100px;
+            width: fit-content;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
         .nav-inner {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            height: 72px;
+            gap: 2.5rem;
         }
 
-        .brand-logo {
-            font-family: var(--font-code);
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--cyan-accent);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
         .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--text-muted);
-            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
         }
-
-        .nav-links a:hover {
-            color: var(--cyan-accent);
-        }
-
-        /* Bento Grid Base Architecture */
-        .bento-grid-12 {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.25rem;
-            margin-bottom: 4rem;
-        }
+        .nav-links a:hover { color: var(--cyan-primary); }
 
         .bento-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 1.75rem;
-            backdrop-filter: blur(12px);
+            border-radius: 28px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(16px);
         }
 
         .bento-card:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.05);
         }
-
-        /* Section Title Styling */
-        .section-header {
-            margin: 5rem 0 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-header h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .section-header .tag-badge {
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            padding: 0.3rem 0.8rem;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--cyan-accent);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 50px;
-        }
-
-        /* Hero Bento Layer */
-        .col-span-8 { grid-column: span 8; }
-        .col-span-4 { grid-column: span 4; }
-        .col-span-6 { grid-column: span 6; }
-        .col-span-12 { grid-column: span 12; }
 
         .hero-title {
-            font-size: 3rem;
+            font-family: var(--font-heading);
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
             font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.2));
         }
 
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
+        .system-monitor {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
             font-family: var(--font-code);
-            font-size: 0.8rem;
-            color: var(--emerald-accent);
-            background: rgba(52, 211, 153, 0.1);
-            border: 1px solid rgba(52, 211, 153, 0.2);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--emerald-primary);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        .pulse-dot {
+        .status-pulse {
             width: 8px;
             height: 8px;
-            background-color: var(--emerald-accent);
+            background: var(--emerald-primary);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--emerald-accent);
+            animation: pulse-ring 2s infinite;
         }
 
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 650px;
-            margin-bottom: 2rem;
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.8); }
         }
 
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.75rem 1.4rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background: var(--cyan-accent);
-            color: #07090e;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-glass {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-main);
-        }
-
-        .btn-glass:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* DevOps Terminal Card */
-        .terminal-window {
+        .terminal-container {
             background: #0d1117;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            font-family: var(--font-code);
-            font-size: 0.82rem;
-            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
         }
 
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 0.5rem;
-        }
-
-        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
-
-        .terminal-code {
+        .terminal-content {
+            flex: 1;
+            padding: 1.5rem;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
             color: #c9d1d9;
-            line-height: 1.8;
+            overflow-y: auto;
         }
 
-        .terminal-code .cmd { color: var(--cyan-accent); }
-        .terminal-code .arg { color: var(--purple-accent); }
-        .terminal-code .res { color: var(--emerald-accent); }
+        .cmd-line { color: var(--cyan-primary); font-weight: 700; }
+        .log-success { color: var(--emerald-primary); }
+        .log-info { color: var(--purple-primary); }
 
-        /* Stats Grid Layer */
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: var(--font-code);
-            color: var(--cyan-accent);
-            margin-bottom: 0.2rem;
+        .skill-meter {
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan-primary), var(--blue-primary));
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .bento-card:hover .skill-progress {
+            width: var(--percent);
         }
 
-        /* Experience Timeline Card */
-        .work-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .company-title {
-            font-size: 1.3rem;
+        .btn-modern {
+            padding: 1rem 2.5rem;
+            border-radius: 18px;
             font-weight: 700;
-        }
-
-        .role-subtitle {
-            color: var(--cyan-accent);
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .date-badge {
-            font-family: var(--font-code);
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.35rem 0.8rem;
-            border-radius: 6px;
-            color: var(--text-muted);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .bullet-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .bullet-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            color: var(--text-muted);
             font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .bullet-list li::before {
-            content: "➜";
+        .btn-glow { background: #fff; color: #000; }
+        .btn-glow:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); }
+
+        .btn-outline { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); color: #fff; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+
+        .timeline-line {
             position: absolute;
-            left: 0;
-            color: var(--cyan-accent);
-            font-size: 0.85rem;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyan-primary) 0%, transparent 100%);
+            opacity: 0.2;
         }
 
-        /* Tech Arsenal Chips */
-        .skill-group-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: var(--text-main);
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .chip-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .chip {
-            font-family: var(--font-code);
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-subtle);
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            color: var(--text-muted);
-            transition: all 0.2s ease;
-        }
-
-        .chip:hover {
-            color: var(--cyan-accent);
-            border-color: var(--cyan-accent);
-            background: rgba(56, 189, 248, 0.08);
-        }
-
-        /* Certifications & Education */
-        .cert-grid-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 1rem 1.25rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .cert-icon {
-            font-size: 1.5rem;
-            color: var(--amber-accent);
-        }
-
-        .cgpa-pill {
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            color: var(--emerald-accent);
-            background: rgba(52, 211, 153, 0.1);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 0.4rem;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 3rem 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 992px) {
-            .col-span-8, .col-span-4, .col-span-6 { grid-column: span 12; }
-            .hero-title { font-size: 2.4rem; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .bento-grid-12 { grid-template-columns: 1fr; }
-            .col-span-12, .col-span-8, .col-span-6, .col-span-4 { grid-column: span 1; }
-        }
+        [data-reveal].active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- Glass Navbar -->
+    <canvas id="bg-canvas"></canvas>
+
     <nav>
-        <div class="wrapper nav-inner">
-            <a href="#" class="brand-logo">
-                <i class="fa-solid fa-terminal"></i> saichandan.dev
-            </a>
+        <div class="nav-inner">
+            <a href="#" class="font-black text-xl tracking-tighter">MS<span class="text-sky-400">.</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#exp">Exp</a></li>
+                <li><a href="#tech">Tech</a></li>
+                <li><a href="#certs">Certs</a></li>
             </ul>
+            <a href="mailto:maddisaichandan2001@gmail.com" class="bg-white text-black px-5 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform">Resume</a>
         </div>
     </nav>
 
-    <div class="wrapper" style="margin-top: 100px;">
-
-        <!-- HERO BENTO GRID LAYER -->
-        <div class="bento-grid-12" id="about">
-            
-            <!-- Bio Card (8 Columns) -->
-            <div class="bento-card col-span-8">
-                <div class="status-pill">
-                    <span class="pulse-dot"></span> Available for DevOps & Infrastructure Opportunities
+    <main class="wrapper pt-48 pb-32">
+        <div class="grid grid-cols-12 gap-8 mb-8" id="about">
+            <div class="col-span-12 lg:col-span-8 bento-card p-10 lg:p-14 flex flex-col justify-center min-h-[520px]" data-reveal>
+                <div class="system-monitor">
+                    <span class="status-pulse"></span>
+                    <span>Status: <span class="text-white">Active Talent</span> | Role: <span class="text-white">DevOps / SRE</span></span>
                 </div>
-                <h1 class="hero-title">Maddi Saichandan</h1>
-                <p class="hero-desc">
-                    DevOps Engineer with 2 years of experience at UBS (Union Bank of Switzerland), specializing in cloud infrastructure, Kubernetes orchestration, automated GitLab & Azure DevOps CI/CD pipelines, and enterprise-grade observability.
+                <p class="text-sky-400 font-mono text-sm mb-4 tracking-widest uppercase">Tech DevOps Engineer</p>
+                <h1 class="hero-title mb-6">Maddi Saichandan</h1>
+                <p class="text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+                    Ex-<strong>UBS</strong> Infrastructure Engineer. Specialized in <strong>AKS</strong> orchestration, <strong>Terraform</strong> automation, and high-concurrency <strong>GitLab</strong> pipelines.
                 </p>
-                <div class="cta-group">
-                    <a href="mailto:maddisaichandan2001@gmail.com" class="btn btn-primary">
-                        <i class="fa-solid fa-paper-plane"></i> Contact Me
-                    </a>
-                    <a href="https://github.com/SAICHANDAN8" target="_blank" class="btn btn-glass">
-                        <i class="fa-brands fa-github"></i> GitHub[cite: 1]
-                    </a>
-                    <a href="https://linkedin.com/in/maddi-saichandan-343592234" target="_blank" class="btn btn-glass">
-                        <i class="fa-brands fa-linkedin"></i> LinkedIn[cite: 1]
-                    </a>
+                <div class="flex flex-wrap gap-5">
+                    <a href="mailto:maddisaichandan2001@gmail.com" class="btn-modern btn-glow"><i class="fa-solid fa-paper-plane"></i> Quick Connect</a>
+                    <a href="#" class="btn-modern btn-outline"><i class="fa-solid fa-cloud-arrow-down"></i> Get Resume</a>
                 </div>
             </div>
 
-            <!-- Terminal Card (4 Columns) -->
-            <div class="bento-card col-span-4">
-                <div class="terminal-window">
-                    <div class="terminal-header">
-                        <span class="terminal-dot dot-red"></span>
-                        <span class="terminal-dot dot-yellow"></span>
-                        <span class="terminal-dot dot-green"></span>
-                        <span style="color: var(--text-muted); font-size: 0.75rem; margin-left: 0.5rem;">bash — 80x24</span>
+            <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+                <div class="bento-card p-6 flex-1 bg-gradient-to-br from-sky-500/10 to-slate-900/50" data-reveal>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Recruiter Snapshot</h3>
+                        <span class="text-[10px] font-bold text-sky-400 bg-sky-400/10 px-2 py-0.5 rounded">Priority Talent</span>
                     </div>
-                    <div class="terminal-code">
-                        <p><span class="cmd">$</span> az aks get-credentials --name ubs-cluster</p>
-                        <p class="res">✔ Connected to Azure Kubernetes Service</p>
-                        <p><span class="cmd">$</span> terraform plan -out=tfplan</p>
-                        <p class="res">✔ Infrastructure 100% compliant</p>
-                        <p><span class="cmd">$</span> kubectl get pods -n prod</p>
-                        <p class="res">STATUS: 12/12 Running (0 restarts)</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                            <span class="text-xs text-slate-500">Experience</span>
+                            <span class="text-xs font-bold">2+ Years Enterprise</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                            <span class="text-xs text-slate-500">Notice Period</span>
+                            <span class="text-xs font-bold text-emerald-400">Immediate / 15 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                            <span class="text-xs text-slate-500">Location</span>
+                            <span class="text-xs font-bold">Hyderabad (Remote OK)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-500">Current Org</span>
+                            <span class="text-xs font-bold">UBS (Hays)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bento-card overflow-hidden h-[240px]" data-reveal>
+                    <div class="bg-slate-900/80 p-3 border-b border-white/5 flex gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/30"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/30"></div>
+                        <span class="text-[9px] text-slate-600 font-mono">live_ops.log</span>
+                    </div>
+                    <div class="terminal-content p-4 text-[11px]" id="terminal-output"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24" data-reveal>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 p-4 flex items-center">
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-600">Targeting Roles:</h3>
+                </div>
+                <div class="md:col-span-3 flex flex-wrap gap-3">
+                    <div class="bg-sky-400/5 border border-sky-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-sky-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-gears text-sky-400"></i><span class="font-bold text-sm">DevOps Engineer</span>
+                    </div>
+                    <div class="bg-purple-400/5 border border-purple-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-purple-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-server text-purple-400"></i><span class="font-bold text-sm">SRE</span>
+                    </div>
+                    <div class="bg-emerald-400/5 border border-emerald-400/20 px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-emerald-400/10 transition-colors cursor-default">
+                        <i class="fa-solid fa-cloud text-emerald-400"></i><span class="font-bold text-sm">Cloud Engineer</span>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- STATS BENTO LAYER -->
-        <div class="bento-grid-12">
-            <div class="bento-card col-span-3">
-                <div class="stat-number">2+ Years</div>
-                <div class="stat-label">Enterprise Experience[cite: 1]</div>
+        <div class="mb-32" id="exp" data-reveal>
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">01. Experience</span>
+                    <h2 class="text-4xl font-bold mt-2">Professional Impact</h2>
+                </div>
+                <div class="hidden md:block text-right"><p class="text-4xl font-black text-white/5">UBS / HAYS</p></div>
             </div>
-            <div class="bento-card col-span-3">
-                <div class="stat-number">UBS</div>
-                <div class="stat-label">Regulated Banking Domain[cite: 1]</div>
-            </div>
-            <div class="bento-card col-span-3">
-                <div class="stat-number">4 Certs</div>
-                <div class="stat-label">Microsoft & GitLab[cite: 1]</div>
-            </div>
-            <div class="bento-card col-span-3">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Automated Pipelines[cite: 1]</div>
-            </div>
-        </div>
-
-        <!-- WORK EXPERIENCE LAYER -->
-        <div class="section-header" id="experience">
-            <h2>Work Experience</h2>
-            <span class="tag-badge">Production Impact</span>
-        </div>
-
-        <div class="bento-grid-12">
-            <div class="bento-card col-span-12">
-                <div class="work-card-header">
+            <div class="bento-card p-10 lg:p-12">
+                <div class="flex flex-col md:flex-row justify-between mb-10 gap-6">
                     <div>
-                        <div class="company-title">Hays India Private Limited | Client: UBS (Union Bank of Switzerland)[cite: 1]</div>
-                        <div class="role-subtitle">Tech DevOps Engineer[cite: 1]</div>
+                        <h3 class="text-3xl font-bold mb-2">Tech DevOps Engineer</h3>
+                        <p class="text-sky-400 text-lg font-semibold">Hays India — UBS (Union Bank of Switzerland)</p>
                     </div>
-                    <div class="date-badge">Jan 2025 – Present | Hyderabad, India[cite: 1]</div>
+                    <div class="md:text-right">
+                        <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 font-bold text-xs uppercase">Jan 2025 — Present</span>
+                        <p class="text-slate-500 text-xs mt-2 uppercase tracking-widest font-mono">Hyderabad, India</p>
+                    </div>
                 </div>
-                <ul class="bullet-list">
-                    <li>Engineered and deployed GitLab CI/CD and Azure DevOps YAML pipelines automating build, test, pipeline security scans, and zero-downtime deployment workflows[cite: 1].</li>
-                    <li>Provisioned scalable Azure cloud infrastructure using Terraform IaC modules with automated plan/apply deployment gates[cite: 1].</li>
-                    <li>Managed Azure Kubernetes Service (AKS) cluster deployments, Docker container optimization, rolling updates, rollbacks, and active troubleshooting[cite: 1].</li>
-                    <li>Maintained Azure Database for PostgreSQL including automated backups, RBAC access controls, performance tuning, and version upgrades[cite: 1].</li>
-                    <li>Constructed Grafana dashboards and configured Grafana Alloy agents to stream metrics, logs, and trace telemetry from AKS clusters[cite: 1].</li>
-                    <li>Utilized Azure Monitor and Log Analytics Workspaces (KQL) for rapid root cause analysis of production issues in compliance with banking environments[cite: 1].</li>
-                    <li>Governed enterprise change controls and incident responses in ServiceNow (GSNOW) and coordinated multi-environment releases via Atlas[cite: 1].</li>
-                </ul>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6 group-hover:bg-sky-500 group-hover:text-black transition-all"><i class="fa-solid fa-code-branch"></i></div>
+                        <h4 class="font-bold text-lg mb-3">CI/CD Orchestration</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Engineered high-concurrency pipelines in GitLab and Azure DevOps with automated compliance gates.</p>
+                    </div>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-500 group-hover:text-black transition-all"><i class="fa-solid fa-cubes"></i></div>
+                        <h4 class="font-bold text-lg mb-3">AKS Management</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Scaling container operations on Azure Kubernetes Service with Docker optimization and Helm charts.</p>
+                    </div>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:bg-emerald-500 group-hover:text-black transition-all"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 class="font-bold text-lg mb-3">Full-Stack Observability</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Leveraging Grafana Alloy and KQL to stream production metrics and telemetry for 99.9% uptime.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- TECHNICAL SKILLS BENTO LAYER -->
-        <div class="section-header" id="skills">
-            <h2>Technical Arsenal</h2>
-            <span class="tag-badge">Multi-Cloud & DevOps</span>
-        </div>
-
-        <div class="bento-grid-12">
-            
-            <div class="bento-card col-span-4">
-                <div class="skill-group-title">
-                    <i class="fa-solid fa-cloud" style="color: var(--cyan-accent);"></i> Cloud & Infrastructure[cite: 1]
-                </div>
-                <div class="chip-container">
-                    <span class="chip">Microsoft Azure[cite: 1]</span>
-                    <span class="chip">Azure Kubernetes Service (AKS)[cite: 1]</span>
-                    <span class="chip">Azure Container Registry[cite: 1]</span>
-                    <span class="chip">Virtual Network (VNet)[cite: 1]</span>
-                    <span class="chip">Storage Accounts[cite: 1]</span>
-                </div>
+        <div class="mb-32" id="tech" data-reveal>
+            <div class="mb-12">
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">02. Stack</span>
+                <h2 class="text-4xl font-bold mt-2">The Arsenal</h2>
             </div>
-
-            <div class="bento-card col-span-4">
-                <div class="skill-group-title">
-                    <i class="fa-solid fa-code-merge" style="color: var(--purple-accent);"></i> CI/CD & IaC[cite: 1]
-                </div>
-                <div class="chip-container">
-                    <span class="chip">Terraform[cite: 1]</span>
-                    <span class="chip">GitLab CI/CD[cite: 1]</span>
-                    <span class="chip">Azure DevOps Pipelines[cite: 1]</span>
-                    <span class="chip">Git[cite: 1]</span>
-                    <span class="chip">Approval Gates[cite: 1]</span>
-                    <span class="chip">Security Scans[cite: 1]</span>
-                </div>
-            </div>
-
-            <div class="bento-card col-span-4">
-                <div class="skill-group-title">
-                    <i class="fa-solid fa-cubes" style="color: var(--emerald-accent);"></i> Containers & Orchestration[cite: 1]
-                </div>
-                <div class="chip-container">
-                    <span class="chip">Docker[cite: 1]</span>
-                    <span class="chip">Kubernetes[cite: 1]</span>
-                    <span class="chip">Helm[cite: 1]</span>
-                    <span class="chip">kubectl[cite: 1]</span>
-                    <span class="chip">Rolling Updates[cite: 1]</span>
-                </div>
-            </div>
-
-            <div class="bento-card col-span-6">
-                <div class="skill-group-title">
-                    <i class="fa-solid fa-chart-line" style="color: var(--amber-accent);"></i> Observability & Telemetry[cite: 1]
-                </div>
-                <div class="chip-container">
-                    <span class="chip">Grafana[cite: 1]</span>
-                    <span class="chip">Grafana Alloy[cite: 1]</span>
-                    <span class="chip">Prometheus[cite: 1]</span>
-                    <span class="chip">Loki[cite: 1]</span>
-                    <span class="chip">Azure Monitor[cite: 1]</span>
-                    <span class="chip">Log Analytics[cite: 1]</span>
-                    <span class="chip">KQL[cite: 1]</span>
-                </div>
-            </div>
-
-            <div class="bento-card col-span-6">
-                <div class="skill-group-title">
-                    <i class="fa-solid fa-terminal" style="color: var(--cyan-accent);"></i> Scripting & Databases[cite: 1]
-                </div>
-                <div class="chip-container">
-                    <span class="chip">Python[cite: 1]</span>
-                    <span class="chip">Bash[cite: 1]</span>
-                    <span class="chip">PowerShell[cite: 1]</span>
-                    <span class="chip">YAML[cite: 1]</span>
-                    <span class="chip">SQL[cite: 1]</span>
-                    <span class="chip">FastAPI[cite: 1]</span>
-                    <span class="chip">PostgreSQL[cite: 1]</span>
-                    <span class="chip">ServiceNow (GSNOW)[cite: 1]</span>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- CERTIFICATIONS & EDUCATION BENTO LAYER -->
-        <div class="section-header" id="certifications">
-            <h2>Certifications & Education</h2>
-            <span class="tag-badge">Qualifications</span>
-        </div>
-
-        <div class="bento-grid-12" id="education">
-            
-            <div class="bento-card col-span-6">
-                <div class="skill-group-title" style="margin-bottom: 1.25rem;">
-                    <i class="fa-solid fa-certificate" style="color: var(--amber-accent);"></i> Official Certifications[cite: 1]
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-                    <div class="cert-grid-item">
-                        <i class="fa-brands fa-microsoft cert-icon"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Cloud <i class="fa-solid fa-cloud text-sky-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div style="font-weight: 600;">Microsoft Certified: Azure Fundamentals (AZ-900)[cite: 1]</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Microsoft[cite: 1]</div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Azure</span><span class="text-sky-400">95%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 95%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">AKS / K8s</span><span class="text-sky-400">90%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%;"></div></div>
                         </div>
                     </div>
-                    <div class="cert-grid-item">
-                        <i class="fa-solid fa-brain cert-icon" style="color: var(--purple-accent);"></i>
+                </div>
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">IaC & CI <i class="fa-solid fa-gears text-purple-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div style="font-weight: 600;">Microsoft Certified: Azure AI Fundamentals (AI-900)[cite: 1]</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Microsoft[cite: 1]</div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Terraform</span><span class="text-purple-400">92%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 92%; background: var(--purple-primary);"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">GitLab CI</span><span class="text-purple-400">88%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 88%; background: var(--purple-primary);"></div></div>
                         </div>
                     </div>
-                    <div class="cert-grid-item">
-                        <i class="fa-solid fa-user-shield cert-icon" style="color: var(--cyan-accent);"></i>
+                </div>
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Observe <i class="fa-solid fa-tower-observation text-emerald-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div style="font-weight: 600;">Azure AD Associate[cite: 1]</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Microsoft Azure[cite: 1]</div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Grafana</span><span class="text-emerald-400">85%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--emerald-primary);"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Monitor/KQL</span><span class="text-emerald-400">80%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 80%; background: var(--emerald-primary);"></div></div>
                         </div>
                     </div>
-                    <div class="cert-grid-item">
-                        <i class="fa-brands fa-gitlab cert-icon" style="color: #fc6d26;"></i>
+                </div>
+                <div class="bento-card p-8 group">
+                    <h3 class="font-bold text-lg mb-6 flex justify-between items-center">Tooling <i class="fa-solid fa-terminal text-blue-400"></i></h3>
+                    <div class="space-y-6">
                         <div>
-                            <div style="font-weight: 600;">GitLab Fundamentals[cite: 1]</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">GitLab[cite: 1]</div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Python/Bash</span><span class="text-blue-400">85%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 85%; background: var(--blue-primary);"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2"><span class="text-slate-500">Docker</span><span class="text-blue-400">90%</span></div>
+                            <div class="skill-meter"><div class="skill-progress" style="--percent: 90%; background: var(--blue-primary);"></div></div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="bento-card col-span-6">
-                <div class="skill-group-title" style="margin-bottom: 1.25rem;">
-                    <i class="fa-solid fa-graduation-cap" style="color: var(--cyan-accent);"></i> Academic History[cite: 1]
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                        <div style="font-weight: 700; font-size: 1rem;">B.Tech in Computer Science & Data Science[cite: 1]</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">TKR College of Engineering and Technology (2021 – 2024)[cite: 1]</div>
-                        <span class="cgpa-pill">CGPA: 8.0[cite: 1]</span>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" id="certs">
+            <div data-reveal>
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">03. Certifications</span>
+                <h2 class="text-3xl font-bold mt-2 mb-10">Validated Expertise</h2>
+                <div class="space-y-4">
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-sky-400 group-hover:text-black transition-colors rounded-2xl"><i class="fa-brands fa-microsoft"></i></div>
+                        <div><h4 class="font-bold">Azure Fundamentals (AZ-900)</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">Certified Practitioner</p></div>
                     </div>
-
-                    <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                        <div style="font-weight: 700; font-size: 1rem;">Diploma in Electronics & Communication Engineering (ECE)[cite: 1]</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">TKR College of Engineering and Technology (2018 – 2021)[cite: 1]</div>
-                        <span class="cgpa-pill">CGPA: 9.11[cite: 1]</span>
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-purple-400 group-hover:text-black transition-colors rounded-2xl"><i class="fa-solid fa-microchip"></i></div>
+                        <div><h4 class="font-bold">Azure AI Fundamentals (AI-900)</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">Intelligent Solutions</p></div>
                     </div>
-
-                    <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                        <div style="font-weight: 700; font-size: 1rem;">10th Class (Secondary School)[cite: 1]</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Adarsha Vidyalayam High School (2017 – 2018)[cite: 1]</div>
-                        <span class="cgpa-pill">CGPA: 8.5[cite: 1]</span>
+                    <div class="bento-card p-6 flex items-center gap-6 group">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 flex items-center justify-center text-2xl group-hover:bg-orange-500 group-hover:text-black transition-colors rounded-2xl"><i class="fa-brands fa-gitlab"></i></div>
+                        <div><h4 class="font-bold">GitLab Fundamentals</h4><p class="text-slate-500 text-xs uppercase tracking-widest font-mono mt-1">DevOps Pipeline Master</p></div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-        <!-- CONTACT BENTO LAYER -->
-        <div class="bento-grid-12" id="contact" style="margin-top: 4rem;">
-            <div class="bento-card col-span-12" style="text-align: center; padding: 4rem 2rem;">
-                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Build & Scale Infrastructure?</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">
-                    I am actively seeking opportunities in Cloud Engineering, DevOps Automation, and Site Reliability.
-                </p>
-                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                    <a href="mailto:maddisaichandan2001@gmail.com" class="btn btn-primary">
-                        <i class="fa-solid fa-envelope"></i> maddisaichandan2001@gmail.com[cite: 1]
-                    </a>
-                    <a href="tel:+918463928916" class="btn btn-glass">
-                        <i class="fa-solid fa-phone"></i> +91 8463928916[cite: 1]
-                    </a>
+            <div data-reveal>
+                <span class="text-sky-400 font-mono text-sm uppercase tracking-tighter">04. Education</span>
+                <h2 class="text-3xl font-bold mt-2 mb-10">Foundations</h2>
+                <div class="relative pl-10 space-y-12">
+                    <div class="timeline-line"></div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-0 w-5 h-5 rounded-full bg-sky-400 border-4 border-black z-10"></div>
+                        <h4 class="font-bold text-xl">B.Tech in CS & Data Science</h4>
+                        <p class="text-slate-400">TKR College of Engineering and Technology</p>
+                        <div class="mt-4 flex items-center gap-3"><span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-lg">8.0 CGPA</span><span class="text-xs text-slate-500 font-mono">2021 — 2024</span></div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-0 w-5 h-5 rounded-full bg-slate-800 border-4 border-black z-10"></div>
+                        <h4 class="font-bold text-xl">Diploma in ECE</h4>
+                        <p class="text-slate-400">TKR College of Engineering and Technology</p>
+                        <div class="mt-4 flex items-center gap-3"><span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-lg">9.11 CGPA</span><span class="text-xs text-slate-500 font-mono">2018 — 2021</span></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="wrapper">
-            <p>&copy; 2026 Maddi Saichandan. Designed with Bento Grid architecture & hosted on GitHub Pages[cite: 1].</p>
+        <div class="mt-48 text-center" data-reveal>
+            <h2 class="hero-title !text-5xl md:!text-7xl mb-12">Let's connect.</h2>
+            <div class="flex flex-col items-center gap-8">
+                <a href="mailto:maddisaichandan2001@gmail.com" class="text-3xl md:text-5xl font-light hover:text-sky-400 transition-colors border-b border-white/10 pb-4">maddisaichandan2001@gmail.com</a>
+                <div class="flex gap-12">
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-black mb-2">Direct Line</p>
+                        <a href="tel:+918463928916" class="text-xl font-bold">+91 8463928916</a>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-black mb-2">Location</p>
+                        <p class="text-xl font-bold">Hyderabad, IN</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
+
+    <footer class="py-20 border-t border-white/5 bg-black/50 text-center">
+        <p class="text-slate-500 text-sm font-mono">&copy; 2026 Maddi Saichandan / Designed for High-Scale Ops.</p>
     </footer>
 
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 2
+                });
+            }
+        }
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                particles.forEach(p2 => {
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                });
+            });
+            requestAnimationFrame(drawParticles);
+        }
+        const logs = [
+            { t: "Establishing secure shell...", c: "log-info" },
+            { t: "Connecting to UBS-AKS-Prod-Cluster...", c: "log-info" },
+            { t: "Authentication success: Saichandan.dev", c: "log-success" },
+            { t: "Syncing 12 running nodes...", c: "log-info" },
+            { t: "kubectl get nodes --all-namespaces", c: "cmd-line" },
+            { t: "NAME STATUS AGE VERSION", c: "text-slate-500" },
+            { t: "aks-nodepool-1 Ready 142d v1.27.3", c: "log-success" },
+            { t: "aks-nodepool-2 Ready 142d v1.27.3", c: "log-success" },
+            { t: "Fetching production metrics...", c: "log-info" },
+            { t: "CPU Usage: 42% | RAM: 64% | Disk: OK", c: "log-success" },
+            { t: "Checking Terraform state drift...", c: "log-info" },
+            { t: "State is up to date. No drift detected.", c: "log-success" },
+            { t: "Awaiting next deployment hook...", c: "cmd-line" }
+        ];
+        function runTerminal() {
+            const container = document.getElementById('terminal-output');
+            if(!container) return;
+            let i = 0;
+            function addLog() {
+                if (i < logs.length) {
+                    const p = document.createElement('p');
+                    p.className = 'mb-2 ' + logs[i].c;
+                    p.innerHTML = logs[i].t;
+                    container.appendChild(p);
+                    container.scrollTop = container.scrollHeight;
+                    i++;
+                    setTimeout(addLog, 800 + Math.random() * 1000);
+                } else { i = 0; container.innerHTML = ''; addLog(); }
+            }
+            addLog();
+        }
+        function handleReveal() {
+            const reveals = document.querySelectorAll('[data-reveal]');
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) { el.classList.add('active'); }
+            });
+        }
+        window.addEventListener('scroll', handleReveal);
+        window.addEventListener('resize', initParticles);
+        window.onload = () => { initParticles(); drawParticles(); runTerminal(); handleReveal(); };
+    </script>
 </body>
 </html>
